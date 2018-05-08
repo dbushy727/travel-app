@@ -3,12 +3,14 @@
 namespace App\Models;
 
 use App\Models\Activity;
+use App\Traits\Slugable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Malhal\Geographical\Geographical;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, Geographical, Slugable;
 
     /**
      * The attributes that are mass assignable.
@@ -16,7 +18,13 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'slug',
+        'name',
+        'email',
+        'password',
+        'slug',
+        'latitude',
+        'longitude',
+        'api_token',
     ];
 
     /**
@@ -31,5 +39,11 @@ class User extends Authenticatable
     public function activities()
     {
         return $this->belongsToMany(Activity::class, 'activity_members');
+    }
+
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = $value;
+        $this->attributes['slug'] = $this->slug($value);
     }
 }

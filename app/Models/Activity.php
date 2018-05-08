@@ -3,17 +3,25 @@
 namespace App\Models;
 
 use App\Models\User;
+use App\Traits\Slugable;
 use Illuminate\Database\Eloquent\Model;
+use Malhal\Geographical\Geographical;
 
 class Activity extends Model
 {
+    use Geographical, Slugable;
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'description', 'slug',
+        'name',
+        'description',
+        'slug',
+        'latitude',
+        'longitude',
     ];
 
     public function members()
@@ -24,16 +32,6 @@ class Activity extends Model
     public function setNameAttribute($value)
     {
         $this->attributes['name'] = $value;
-        $this->attributes['slug'] = $this->makeSlugFromName($value);
+        $this->attributes['slug'] = $this->slug($value);
     }
-
-    protected function makeSlugFromName($name)
-    {
-        $slug = str_slug($name);
-
-        $count = Activity::whereRaw("slug RLIKE '^{$slug}(-[0-9]+)?$'")->count();
-
-        return $count ? "{$slug}-{$count}" : $slug;
-    }
-
 }

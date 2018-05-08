@@ -13,18 +13,16 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::middleware('auth:api')->group(function () {
+    Route::prefix('activities')->group(function () {
+        Route::get('/', 'ActivitiesController@index')->name('activities');
+        Route::post('/', 'ActivitiesController@store');
+        Route::get('/{activity}', 'ActivitiesController@show')->name('activity');
+        Route::put('/{activity}', 'ActivitiesController@update');
+        Route::delete('/{activity}', 'ActivitiesController@destroy');
 
-Route::prefix('activities')->group(function () {
-    Route::get('/', 'ActivitiesController@index')->name('activities');
-    Route::post('/', 'ActivitiesController@store');
-    Route::get('/{activity}', 'ActivitiesController@show')->name('activity');
-    Route::put('/{activity}', 'ActivitiesController@update');
-    Route::delete('/{activity}', 'ActivitiesController@destroy');
-
-    Route::get('/{activity}/members', 'ActivityMembersController@index')->name('activity-members');
-    Route::post('/{activity}/members/{user}', 'ActivityMembers@store');
-    Route::delete('/{activity}/members/{user}', 'ActivityMembers@destroy');
+        Route::get('/{activity}/members', 'ActivityMembersController@index')->name('activity-members');
+        Route::post('/{activity}/members/{user}', 'ActivityMembers@store');
+        Route::delete('/{activity}/members/{user}', 'ActivityMembers@destroy');
+    });
 });

@@ -12,9 +12,16 @@ class ActivitiesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Activity::all();
+        $params = [
+            $this->authenticated_user->latitude,
+            $this->authenticated_user->longitude,
+            0,
+            $request->get('range', 5),
+        ];
+
+        return Activity::geofence(...$params)->get();
     }
 
     /**
