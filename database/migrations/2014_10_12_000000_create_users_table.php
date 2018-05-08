@@ -20,8 +20,8 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
 
-            $table->string('languages');
-            $table->string('nationality');
+            $table->string('languages')->nullable();
+            $table->string('nationality')->nullable();
 
             $table->string('slug')->unique();
             $table->string('api_token')->unique();

@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Faker\Generator as Faker;
 
 /*
@@ -14,10 +15,14 @@ use Faker\Generator as Faker;
 */
 
 $factory->define(App\Models\Activity::class, function (Faker $faker) {
-    $name = $faker->sentence;
+    $start_at = $faker->dateTimeThisMonth->format('Y-m-d h:i:s');
+    $end_at   = Carbon::parse($start_at)->addHours(rand(3,10));
     return [
-        'name' => $name,
+        'name'        => $faker->sentence,
         'description' => $faker->paragraph,
-        'slug' => str_slug($name),
+        'latitude'    => $faker->latitude,
+        'longitude'   => $faker->longitude,
+        'start_at'    => $start_at,
+        'end_at'      => $end_at,
     ];
 });

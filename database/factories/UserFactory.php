@@ -14,14 +14,25 @@ use Faker\Generator as Faker;
 */
 
 $factory->define(App\Models\User::class, function (Faker $faker) {
-    $name = $faker->name;
     return [
-        'name' => $name,
-        'email' => $faker->unique()->safeEmail,
-        'bio' => $faker->paragraph,
-        'slug' => str_slug($name),
-        'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', // secret
+        'name'           => $faker->name,
+        'email'          => $faker->unique()->safeEmail,
+        'bio'            => $faker->sentence,
+        'password'       => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', // secret
         'remember_token' => str_random(10),
-        'api_token' => str_random(32),
+        'api_token'      => str_random(32),
+        'latitude'       => $faker->latitude,
+        'longitude'      => $faker->longitude,
+        'nationality'    => $faker->country,
+        'languages'      => implode(', ', array_random([
+            'English',
+            'Spanish',
+            'French',
+            'Italian',
+            'Chinese',
+            'Japanese',
+            'Korean',
+            'Russian',
+        ], rand(1,3))),
     ];
 });

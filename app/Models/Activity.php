@@ -29,6 +29,11 @@ class Activity extends Model
         return $this->belongsToMany(User::class, 'activity_members');
     }
 
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'activity_tags');
+    }
+
     public function setNameAttribute($value)
     {
         $this->attributes['name'] = $value;

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class ActivityMembers extends Migration
+class CreateTagsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,10 @@ class ActivityMembers extends Migration
      */
     public function up()
     {
-        Schema::create('activity_members', function (Blueprint $table) {
+        Schema::create('tags', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned();
-            $table->integer('activity_id')->unsigned();
+            $table->string('name')->unique();
             $table->timestamps();
-
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('activity_id')->references('id')->on('activities');
         });
     }
 
@@ -31,6 +27,6 @@ class ActivityMembers extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('activity_members');
+        Schema::dropIfExists('tags');
     }
 }

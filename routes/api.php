@@ -25,4 +25,13 @@ Route::middleware('auth:api')->group(function () {
         Route::post('/{activity}/members/{user}', 'ActivityMembers@store');
         Route::delete('/{activity}/members/{user}', 'ActivityMembers@destroy');
     });
+
+    Route::prefix('tags')->group(function () {
+        Route::get('/', 'TagsController@index')->name('tags');
+        Route::post('/', 'TagsController@store');
+
+        Route::get('/{tag}/activities', 'ActivityTagsController@index');
+        Route::post('/{tag}/activities/{activity}', 'ActivityTagsController@store');
+        Route::delete('/{tag}/activities/{activity}', 'ActivityTagsController@destroy');
+    });
 });
