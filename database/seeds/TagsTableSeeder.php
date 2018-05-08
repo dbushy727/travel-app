@@ -17,11 +17,7 @@ class TagsTableSeeder extends Seeder
         $faker = app('Faker\Generator');
 
         collect()->times(10, function () use ($faker) {
-            return Tag::create([
-                'name' => $faker->unique()->word,
-                // 'created_at' => Carbon::now(),
-                // 'updated_at' => Carbon::now(),
-            ]);
+            return Tag::create(['name' => $faker->unique()->word]);
         })->each(function ($tag) {
             $activities = Activity::inRandomOrder()->take(rand(1, 4))->get();
             $tag->activities()->withTimestamps()->saveMany($activities);
