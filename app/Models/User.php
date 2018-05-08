@@ -25,6 +25,8 @@ class User extends Authenticatable
         'latitude',
         'longitude',
         'api_token',
+        'languages',
+        'nationality',
     ];
 
     /**

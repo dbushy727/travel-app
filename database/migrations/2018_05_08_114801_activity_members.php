@@ -21,6 +21,7 @@ class ActivityMembers extends Migration
 
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('activity_id')->references('id')->on('activities');
+            $table->unique(['user_id', 'activity_id']);
         });
     }
 

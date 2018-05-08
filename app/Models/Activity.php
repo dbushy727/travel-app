@@ -22,6 +22,8 @@ class Activity extends Model
         'slug',
         'latitude',
         'longitude',
+        'start_at',
+        'end_at',
     ];
 
     public function members()

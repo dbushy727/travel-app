@@ -21,7 +21,7 @@ class ActivitiesController extends Controller
             $request->get('range', 5),
         ];
 
-        return Activity::geofence(...$params)->get();
+        return Activity::geofence(...$params)->orderBy('distance', 'asc')->get();
     }
 
     /**

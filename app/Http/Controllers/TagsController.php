@@ -25,6 +25,6 @@ class TagsController extends Controller
      */
     public function store(Request $request)
     {
-        return Tag::firstOrCreate($request->all())
+        return Tag::firstOrCreate($request->post());
     }
 }

@@ -39,7 +39,7 @@ class ActivityTagsController extends Controller
      */
     public function destroy(Tag $tag, Activity $activity)
     {
-        $tag->activities()->delete($activity);
+        $tag->activities()->detach($activity);
 
         return $tag->activities;
     }

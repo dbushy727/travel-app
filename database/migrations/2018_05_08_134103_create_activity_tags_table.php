@@ -21,6 +21,7 @@ class CreateActivityTagsTable extends Migration
 
             $table->foreign('activity_id')->references('id')->on('activities');
             $table->foreign('tag_id')->references('id')->on('tags');
+            $table->unique(['activity_id', 'tag_id']);
         });
     }
 

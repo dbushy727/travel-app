@@ -39,7 +39,7 @@ class ActivityMembersController extends Controller
      */
     public function destroy(Activity $activity, User $user)
     {
-        $activity->members()->delete($user);
+        $activity->members()->detach($user);
 
         return $activity->members;
     }
