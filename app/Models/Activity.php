@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Activity extends Model
@@ -15,7 +16,18 @@ class Activity extends Model
         'name', 'description', 'slug',
     ];
 
-    public function makeSlugFromName($name)
+    public function members()
+    {
+        return $this->belongsToMany(User::class, 'activity_members');
+    }
+
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = $value;
+        $this->attributes['slug'] = $this->makeSlugFromName($value);
+    }
+
+    protected function makeSlugFromName($name)
     {
         $slug = str_slug($name);
 
@@ -24,9 +36,4 @@ class Activity extends Model
         return $count ? "{$slug}-{$count}" : $slug;
     }
 
-    public function setNameAttribute($value)
-    {
-        $this->attributes['name'] = $value;
-        $this->attributes['slug'] = $this->makeSlugFromName($value);
-    }
 }
