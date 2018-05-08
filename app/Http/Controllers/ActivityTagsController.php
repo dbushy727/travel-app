@@ -26,7 +26,7 @@ class ActivityTagsController extends Controller
      */
     public function store(Tag $tag, Activity $activity)
     {
-        $tag->activities()->save($activity);
+        $tag->activities()->withTimestamps()->save($activity);
 
         return $tag->activities;
     }

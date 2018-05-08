@@ -26,7 +26,7 @@ class ActivityMembersController extends Controller
      */
     public function store(Activity $activity, User $user)
     {
-        $activity->members()->save($user);
+        $activity->members()->withTimestamps()->save($user);
 
         return $activity->members;
     }
