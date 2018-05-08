@@ -23,4 +23,8 @@ Route::prefix('activities')->group(function () {
     Route::get('/{activity}', 'ActivitiesController@show')->name('activity');
     Route::put('/{activity}', 'ActivitiesController@update');
     Route::delete('/{activity}', 'ActivitiesController@destroy');
+
+    Route::get('/{activity}/members', 'ActivityMembersController@index')->name('activity-members');
+    Route::post('/{activity}/members/{user}', 'ActivityMembers@store');
+    Route::delete('/{activity}/members/{user}', 'ActivityMembers@destroy');
 });
