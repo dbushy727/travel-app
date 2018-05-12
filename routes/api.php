@@ -24,6 +24,10 @@ Route::middleware('auth:api')->group(function () {
         Route::get('/{activity}/members', 'ActivityMembersController@index')->name('activity-members');
         Route::post('/{activity}/members/{user}', 'ActivityMembersController@store');
         Route::delete('/{activity}/members/{user}', 'ActivityMembersController@destroy');
+
+        Route::get('/{activity}/messages', 'ActivityMessagesController@index')->name('activity-messages');
+        Route::post('/{activity}/messages', 'ActivityMessagesController@store');
+        Route::delete('/{activity}/messages/{message}', 'ActivityMessagesController@destroy');
     });
 
     Route::prefix('tags')->group(function () {

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Message;
 use App\Models\User;
 use App\Traits\Slugable;
 use Illuminate\Database\Eloquent\Model;
@@ -34,6 +35,11 @@ class Activity extends Model
     public function tags()
     {
         return $this->belongsToMany(Tag::class, 'activity_tags');
+    }
+
+    public function messages()
+    {
+        return $this->belongsToMany(Message::class, 'activity_messages');
     }
 
     public function setNameAttribute($value)

@@ -43,6 +43,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Activity::class, 'activity_members');
     }
 
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
+
     public function setNameAttribute($value)
     {
         $this->attributes['name'] = $value;
