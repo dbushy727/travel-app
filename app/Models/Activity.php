@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Chatroom;
 use App\Models\Message;
 use App\Models\User;
 use App\Traits\Slugable;
@@ -37,9 +38,14 @@ class Activity extends Model
         return $this->belongsToMany(Tag::class, 'activity_tags');
     }
 
+    public function chatroom()
+    {
+        return $this->belongsTo(Chatroom::class);
+    }
+
     public function messages()
     {
-        return $this->belongsToMany(Message::class, 'activity_messages');
+        return $this->hasManyThrough(Message::class, Chatroom::class);
     }
 
     public function setNameAttribute($value)

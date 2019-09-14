@@ -27,25 +27,11 @@ class ActivityMessagesController extends Controller
      */
     public function store(Activity $activity, Request $request)
     {
-        $message = Message::create([
+        Message::create([
             'body'    => $request->get('message'),
             'user_id' => $this->authenticated_user->id,
+            'chatroom_id' => $activity->chatroom->id,
         ]);
-
-        $activity->messages()->withTimestamps()->save($message);
-
-        return $activity->messages;
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Activity  $activity
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Activity $activity, Message $message)
-    {
-        $activity->messages()->detach($message);
 
         return $activity->messages;
     }

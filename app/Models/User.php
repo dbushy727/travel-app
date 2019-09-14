@@ -43,7 +43,7 @@ class User extends Authenticatable
         return $this->belongsToMany(Activity::class, 'activity_members');
     }
 
-    public function messages()
+    public function private_messages()
     {
         return $this->hasMany(Message::class);
     }

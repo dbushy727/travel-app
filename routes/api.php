@@ -27,7 +27,6 @@ Route::middleware('auth:api')->group(function () {
 
         Route::get('/{activity}/messages', 'ActivityMessagesController@index')->name('activity-messages');
         Route::post('/{activity}/messages', 'ActivityMessagesController@store');
-        Route::delete('/{activity}/messages/{message}', 'ActivityMessagesController@destroy');
     });
 
     Route::prefix('tags')->group(function () {

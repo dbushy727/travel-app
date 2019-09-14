@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Seed\MessagesTableSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,6 +13,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(UsersTableSeeder::class);
+        $this->call(ChatroomsTableSeeder::class);
         $this->call(ActivitiesTableSeeder::class);
         $this->call(TagsTableSeeder::class);
         $this->call(MessagesTableSeeder::class);
